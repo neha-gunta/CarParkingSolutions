@@ -5,7 +5,10 @@ import Home from './Home';
 import Navbar from './Navbar';
 import Login from './Login';
 import Signup from './Signup';
-import Dashboard from './Dashboard';
+import UserDashboard from './UserDashboard';
+import AdminDashboard from './AdminDashboard';
+import WorkerDashboard from './WorkerDashboard';
+
 
 function App() {
   return (
@@ -26,11 +29,19 @@ function App() {
               <Signup />  
             </Route>
 
-            <Route exact path="/dashboard" component={Dashboard}>
-              <Dashboard />
+            <Route exact path="/userdashboard" component={UserDashboard}>
+              <UserDashboard />
+            </Route>
+
+            <Route exact path="/admindashboard" component={AdminDashboard}>
+              <AdminDashboard />
+            </Route>
+
+            <Route exact path="/workerdashboard" component={WorkerDashboard}>
+              <WorkerDashboard />
             </Route>
           
-
+          
       </div>
     </Router>
   );
