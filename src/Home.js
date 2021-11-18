@@ -4,7 +4,7 @@ const Home = () => {
     return (  
         <div className="Home">
             <div className="car-img">
-                <img src={img} style={{width: "985px"}}/>
+                <img src={img} style={{width: "100%"}}/>
             </div>
             <div className="home-right">
                 <h1>CAR PARKING SOLUTIONS</h1>

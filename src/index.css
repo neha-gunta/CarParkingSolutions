@@ -64,7 +64,7 @@
   border-radius: 20px;
 }
 .Home{
-  background:#FFFFFF;
+  background:#ffffff;
   display: flex;
 }
 .home-right{
@@ -93,4 +93,10 @@
   line-height: 30px;
   text-align: center;
 }
-  
+Form{
+  max-width: 600px;
+}
+.signup{
+  max-width: 600px;
+  justify-content: center;
+}
