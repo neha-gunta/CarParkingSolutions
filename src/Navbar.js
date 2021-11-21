@@ -6,6 +6,8 @@ const Navbar = () => {
         <header className="navbar">
             <h2>Car Parking Solutions</h2>
             <nav className="links">
+                <Link to="/createem">CreateEm</Link>
+                <Link to="/test">ListEm</Link>
                 <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link>

@@ -8,6 +8,9 @@ import Signup from './Signup';
 import UserDashboard from './UserDashboard';
 import AdminDashboard from './AdminDashboard';
 import WorkerDashboard from './WorkerDashboard';
+import Test from './ListEmployeeComp';
+import CreateEm from './CreateEmployeeComp';
+import UpdateEm from './UpdateEmployeeComp';
 
 
 function App() {
@@ -26,7 +29,9 @@ function App() {
             </Route>   
 
             <Route exact path="/signup" component={Signup}>
-              <Signup />  
+              <div className="container">
+                <Signup />
+              </div>
             </Route>
 
             <Route exact path="/userdashboard" component={UserDashboard}>
@@ -40,7 +45,20 @@ function App() {
             <Route exact path="/workerdashboard" component={WorkerDashboard}>
               <WorkerDashboard />
             </Route>
+
+            <Route exact path="/test" component={Test}>
+              <div className="container">
+                <Test />
+              </div>
+            </Route>
+
+            <Route exact path="/createem" component={CreateEm}>
+              <CreateEm />
+            </Route>
           
+            <Route exact path="/update-employee/:id" component={UpdateEm}>
+              <UpdateEm />
+            </Route>
           
       </div>
     </Router>
