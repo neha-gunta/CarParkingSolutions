@@ -1,41 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { withRouter, RouteComponentProps } from "react-router";
-import EmployeeService from "./services/EmployeeService";
-import { Link } from "react-router-dom";
+const WorkerDashboard = () => {
 
-function Test(props: MyComponent) {
-
-    const [employees, setEmployees] = useState([]);
-
-    useEffect(() => {
-        getEmployees()
-    }, []);
-
-    const getEmployees = () => {
-        EmployeeService.getEmployees().then((response) => {
-            setEmployees(response.data);
-            console.log(response.data);
-        });
-    };
-
-    function deleteEmployee(id){
-        EmployeeService.deleteEmployee(id).then((response) => {
-            // employees.filter(employee => employee.id !== id);
-            console.log(id);
-            window.location.reload(false);
-        })
-    }
-
-    function viewEmployee(id){
-        props.history.push(`/view/${id}`);
-    }
+    
 
     return (  
-        <div >
-            <h2 className="text-center">Employees List</h2>
-            <div className="row">
-                <Link to="/createem/-1"><button className="btn btn-primary">Add Employee</button></Link>
-            </div><br/>
+        <div className="WorkerDashboard">
+            <div className="tables" style={{marginLeft: "20px", marginTop: "50px", marginRight: "20px"}}>
             <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -46,7 +15,7 @@ function Test(props: MyComponent) {
                             <th> Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {
                             employees.map((employee) => {
                                 return(
@@ -63,15 +32,12 @@ function Test(props: MyComponent) {
                                 )
                             })
                         }
-                    </tbody>
+                    </tbody> */}
                 </table>
+            </div>
             </div>
         </div>
     );
 }
-
-interface MyComponent extends RouteComponentProps {
-    myField: string;
-}
  
-export default withRouter(Test);
+export default WorkerDashboard;
