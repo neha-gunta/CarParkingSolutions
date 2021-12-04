@@ -15,9 +15,9 @@ const UserDashboard = () => {
     const [checkOutTime, setCheckOutTime] = useState('00:00');
     const [slots, setSlots] = useState([]);
 
-    useEffect(() => {
-        getSlots()
-    }, []);
+    // useEffect(() => {
+    //     getSlots()
+    // }, []);
 
     const getSlots = () => {
         SlotService.getSlots().then((response) => {
@@ -28,8 +28,9 @@ const UserDashboard = () => {
 
     function SearchForSlots(){
         SlotService.getSlotsByLocation(location).then((response) => {
-            setSlots(response.data);
+            //setSlots(response.data);
             console.log(response.data);
+            console.log(location);
         })
     }
 
@@ -43,6 +44,7 @@ const UserDashboard = () => {
                 <div className="searchSlots">
                     <div className="container">
                         <h2 className="text-center">Search for Parking Slots</h2>
+                        <button className="btn btn-success" onClick={getSlots}>Get Slots</button>
                         <div className="justify-content-center">
                         <form>
                             <div className="form-group"><br />
