@@ -100,19 +100,18 @@
 Form{
   max-width: 600px;
 }
-.UserDashboard, .AdminDashboard{
+/* .UserDashboard, .AdminDashboard{
   display: flex;
-
-}
+} */
 .sidebar{
   height:90%;
   max-width: 300px;
   text-align: center;
 }
-.pagecontent{
+/* .pagecontent{
   display: inline-block;
-}
-.searchSlots{
+} */
+/* .searchSlots{
   margin-left: 350px;
   margin-top: 20px;
-}
+} */

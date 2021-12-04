@@ -17,10 +17,9 @@ class SlotService{
         return axios.get(SLOTS_API_BASE_URL + "/" + slotId);
         
     }
-
     getSlotsByLocation(location){
         console.log(typeof(location), location);
-        return axios.get(SLOTS_API_BASE_URL, location);
+        return axios.get(SLOTS_WITH_LOC_BASE_URL + "?location=" + location);
     }
 
     updateSlot(slot, slotId){

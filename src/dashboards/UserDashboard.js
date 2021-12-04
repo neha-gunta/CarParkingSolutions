@@ -11,13 +11,13 @@ const UserDashboard = () => {
     const [search, setSearch] = useState(false);
     const [location, setLocation] = useState("");
     const [date, setDate] = useState('');
-    const [checkInTime, setCheckInTime] = useState('00:00');
-    const [checkOutTime, setCheckOutTime] = useState('00:00');
+    const [checkInTime, setCheckInTime] = useState(0);
+    const [checkOutTime, setCheckOutTime] = useState(0);
     const [slots, setSlots] = useState([]);
 
-    // useEffect(() => {
-    //     getSlots()
-    // }, []);
+    useEffect(() => {
+        getSlots()
+    }, []);
 
     const getSlots = () => {
         SlotService.getSlots().then((response) => {
@@ -28,24 +28,22 @@ const UserDashboard = () => {
 
     function SearchForSlots(){
         SlotService.getSlotsByLocation(location).then((response) => {
-            //setSlots(response.data);
+            setSlots(response.data);
             console.log(response.data);
-            console.log(location);
         })
     }
 
     return ( 
         <div className="UserDashboard">
-            <div className="sidebar">
-                <button className="btn btn-default" style={{width: "100%", height: "50px", marginTop: "10px"}}>View Parking Slots</button>
-                <button className="btn btn-default" style={{width: "100%", height: "50px", marginTop: "10px"}}>My Bookings</button> 
+            <div className="navbardb" style={{backgroundColor: "#d6d5d5", height: "70px", width: "100%"}}>
+                <button className="btn btn-default" style={{height: "50px", marginTop: "10px", marginLeft: "200px"}}>View Parking Slots</button>
+                <button className="btn btn-default" style={{height: "50px", marginTop: "10px", marginLeft: "600px"}}>My Bookings</button> 
             </div>
             <div className="pagecontent">
                 <div className="searchSlots">
                     <div className="container">
                         <h2 className="text-center">Search for Parking Slots</h2>
-                        <button className="btn btn-success" onClick={getSlots}>Get Slots</button>
-                        <div className="justify-content-center">
+                        <div className="justify-content-center" style={{marginLeft: "270px"}}>
                         <form>
                             <div className="form-group"><br />
                                 <label>Location</label>
@@ -58,25 +56,28 @@ const UserDashboard = () => {
                                 value={date} onChange={date => {setDate(date)}} />
                             </div>
                             <div className="form-group">
-                                <label>Check-in time</label>
-                                <input type="time" className="form-control" placeholder="checkintime" name="Checkintime"
-                                value={checkInTime} onChange={(e) => {setCheckInTime(e.target.value);
+                                <label>Check-in time (in 24hr format)</label>
+                                <input type="text" className="form-control" placeholder="enter the hour" name="Checkintime"
+                                onChange={(e) => {setCheckInTime(e.target.value);
                                 console.log(checkInTime)}} />
                             </div>
                             <div className="form-group">
-                                <label>Check-out time</label>
-                                <input type="time" className="form-control" className="form-control" placeholder="checkintime" name="Checkintime"
-                                value={checkOutTime} onChange={(e) => setCheckOutTime(e.target.value)} />
+                                <label>Check-out time (in 24 hr format)</label>
+                                <input type="text" className="form-control" className="form-control" placeholder="enter the hour" name="Checkintime"
+                                onChange={(e) => setCheckOutTime(e.target.value)} />
                             </div>
                         </form>
-                        <div className="text-center">
+                        <div style={{marginLeft: "250px"}}>
                             <button className="btn btn-primary" onClick={SearchForSlots}>Search</button>
                         </div>
                         </div>
                         
                     </div>
                 </div>
-                {<div className="tables" style={{marginLeft: "60px", marginTop: "50px"}}>
+                <div className="text-left" style={{marginLeft: "30px"}}>
+                            <button className="btn btn-success" onClick={getSlots}>Get All Slots</button>
+                        </div>
+                {<div className="tables" style={{margin: "40px"}}>
                 {/* <div className="text-center">
                     <p>Location: {location}</p>
                     <p>Date: {date}</p>

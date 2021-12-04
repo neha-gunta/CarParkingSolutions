@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Card, CardGroup } from "react-bootstrap";
+import UserService from '../services/UserService.js';
+import axios from "axios";
 
 const Signup = () => {
 
+    const [verified, setVerified] = useState(false);
     const [Continue, setContinue] = useState(false);
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -16,9 +19,19 @@ const Signup = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [OTP, setOTP] = useState(0);
+    const [OTPfromEmail, setOTPfromEmail] = useState(0);
+    const [OTPMessage, setOTPMessage] = useState("");
 
     function checkContinue(){
         setContinue(true);
+    }
+
+    function checkEmailAndSendOTP(event){
+        
+    }
+
+    function checkOTP(event){
+        
     }
 
     return (  
@@ -57,7 +70,7 @@ const Signup = () => {
 
                                     <div className="form-group">
                                         <label>PINCODE</label>
-                                        <input type="text" className="form-control" value={pincode} onChange={(e) => setPincode(e.target.value)}/>
+                                        <input type="text" className="form-control" onChange={(e) => setPincode(e.target.value)}/>
                                     </div>
 
                                     <div className="form-group">
@@ -88,14 +101,33 @@ const Signup = () => {
                                     <label>Email</label>
                                     <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/><br />
                                     <div className="text-center">
-                                        <button className="btn btn-primary" >Send OTP</button><br />
+                                        <button className="btn btn-primary" onClick={(event) => {
+                                            event.preventDefault();
+                                            axios.post(`http://localhost:8080/api/v1/email`, email);
+                                            console.log(email);
+                                        }}>Check Email and Send OTP</button><br />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                             <label>Enter OTP</label>
-                                            <input type="text" className="form-control" value={OTP} onChange={(e) => setOTP(e.target.value)}/><br />
+                                            <input type="text" className="form-control" onChange={(e) => setOTP(e.target.value)}/><br />
                                     <div className="text-center">
-                                        <button className="btn btn-primary">Verify OTP</button><br />
+                                        <button className="btn btn-primary" onClick={(event) => {
+                                            event.preventDefault();
+                                            UserService.getOTP(email).then((response) => {
+                                                console.log(typeof(response.data));
+                                                setOTPfromEmail(response.data);
+                                            })
+                                            if(OTP == OTPfromEmail){
+                                                setVerified(true);
+                                                setOTPMessage("Email verified.");
+                                                console.log(OTPMessage);
+                                            }
+                                            else if(OTPfromEmail == 0){
+                                                setOTPMessage("OTP entered is wrong. Please try again.");
+                                                console.log(OTPMessage);
+                                            }
+                                        }}>Verify OTP</button><br />
                                     </div>
                                 </div>
                                     <h3 className="text-center">Or</h3>
@@ -111,7 +143,9 @@ const Signup = () => {
                 </Card>
             </div>
             <div className="text-center">
-                <button className="btn btn-success" onClick={checkContinue}>Continue</button><br />
+                {!verified && <><button className="btn btn-success disabled" onClick={checkContinue}>Continue</button><br /></>}
+                {verified && <><button className="btn btn-success enabled" onClick={checkContinue}>Continue</button><br /></>}
+                
             </div>
             <div className="foot" style={{height: "50px"}}></div>
         </div>
